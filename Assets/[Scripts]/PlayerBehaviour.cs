@@ -46,6 +46,22 @@ public class PlayerBehaviour : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravity); //creates a positive number for jumping or "falling upwards"
         }
 
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+
+            Ray ray2 = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+
+            if (Physics.Raycast(ray2, out hit))
+            {
+                Transform objectHit = hit.transform;
+
+                Debug.Log(objectHit);
+
+
+            }
+        }
+
         //apply gravity
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
@@ -53,15 +69,10 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void OnMouseDown() //Not sure if this should go in the piano keys or the player
     {
-        RaycastHit hit;
-        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+       
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 
-        if (Physics.Raycast(ray, out hit))
-        {
-            Transform objectHit = hit.transform;
 
-            Debug.Log(objectHit);
-        }
     }
 
     private void OnDrawGizmos()
