@@ -19,10 +19,14 @@ public class PlayerBehaviour : MonoBehaviour
     public LayerMask groundMask;
     public bool isGrounded;
 
+    GameObject pianoKey;
+    PianoBehavior pianoBehavior;
+
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -58,6 +62,21 @@ public class PlayerBehaviour : MonoBehaviour
 
                 Debug.Log(objectHit);
 
+                if (objectHit.gameObject.name.Contains("PianoKey"))
+                {
+                    Debug.Log("piano key hit");
+                    pianoKey = objectHit.gameObject;
+                    pianoBehavior = pianoKey.GetComponent<PianoBehavior>();
+
+
+                    pianoBehavior.playNote(pianoKey.gameObject.tag + "_KeyPressed");
+                    Debug.Log(pianoKey.gameObject.tag);
+
+                }
+                else
+                {
+                    Debug.Log("no");
+                }
 
             }
         }
