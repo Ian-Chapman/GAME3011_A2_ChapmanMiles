@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: C#_KeyPressed
+  m_Name: A#_KeyPressed
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -47,7 +47,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: BlackPianoKey
+    path: BlackPianoKey (5)
   m_PositionCurves: []
   m_ScaleCurves: []
   m_FloatCurves: []
@@ -60,7 +60,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 171611700
+      path: 335585651
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -122,7 +122,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: BlackPianoKey
+    path: BlackPianoKey (5)
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -159,7 +159,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: BlackPianoKey
+    path: BlackPianoKey (5)
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -196,7 +196,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: BlackPianoKey
+    path: BlackPianoKey (5)
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves:
@@ -207,7 +207,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: BlackPianoKey
+    path: BlackPianoKey (5)
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -217,7 +217,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: BlackPianoKey
+    path: BlackPianoKey (5)
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -227,14 +227,14 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: BlackPianoKey
+    path: BlackPianoKey (5)
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.33333334
-    functionName: notePressedCSharp
+    functionName: notePressedASharp
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
