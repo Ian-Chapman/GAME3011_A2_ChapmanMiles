@@ -23,16 +23,31 @@ public class ButtonManager : MonoBehaviour
         playMelodiesButton.SetActive(false);
     }
 
+    private void Update()
+    {
+        if (Input.GetKey("e"))
+        {
+            soundSource.clip = melodies[0];
+            soundSource.Play();
+        }
+    }
+
+
     public void OnStartGameButtonPressed()
     {
         rigidbody.useGravity = true;
         playMelodiesButton.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked; //Disable mouse when game is started
     }
 
-    public void OnPlayMelodyButtonPressed()
-    {
-        soundSource.clip = melodies[0];
-        soundSource.Play();
-    }
+    //public void OnPlayMelodyButtonPressed()
+    //{
+    //    if (Input.GetKey("e"))
+    //    {
+    //        soundSource.clip = melodies[0];
+    //        soundSource.Play();
+    //    }
+       
+    //}
 
 }
