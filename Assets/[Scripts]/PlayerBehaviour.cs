@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
     public Animator animator;
-
+    public GameObject piano;
     public Camera camera;
     private CharacterController controller;
 
@@ -29,9 +29,8 @@ public class PlayerBehaviour : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
-        animator = gameObject.GetComponent<Animator>();
 
-        animator.SetBool("LiftPiano", false);
+        animator = piano.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -91,20 +90,12 @@ public class PlayerBehaviour : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
 
-    //private void OnMouseDown() //Not sure if this should go in the piano keys or the player
-    //{
-
-    //    Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-
-
-    //}
-
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "TriggerBox")
+        if (other.gameObject.tag == "BoxTrigger")
         {
-            animator.SetBool("LiftPiano", true);
+            animator.SetBool("isPianoLifted", true);
         }
     }
 
