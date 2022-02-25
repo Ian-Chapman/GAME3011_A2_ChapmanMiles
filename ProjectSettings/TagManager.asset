@@ -16,11 +16,12 @@ TagManager:
   - F#
   - G#
   - A#
+  - High C
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 
