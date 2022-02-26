@@ -16,9 +16,10 @@ public class UIManager : MonoBehaviour
     private AudioSource soundSource;
 
     public GameObject instructionsPanel;
-    public GameObject difficultyPanel;
     public GameObject pressEPrompt;
-    
+    public GameObject gameOverCanvas;
+    public GameObject winCanvas;
+
     public GameObject ball;
     public Rigidbody rigidbody;
     public GameManager gameManager;
@@ -35,8 +36,9 @@ public class UIManager : MonoBehaviour
         rigidbody = ball.GetComponent<Rigidbody>();
         rigidbody.useGravity = false;
         instructionsPanel.SetActive(false);
-        difficultyPanel.SetActive(false);
         pressEPrompt.SetActive(false);
+        gameOverCanvas.SetActive(false);
+        winCanvas.SetActive(false);
     }   
 
     private void Update()
@@ -91,17 +93,24 @@ public class UIManager : MonoBehaviour
 
     public void OnStartGame()
     {
-            rigidbody.useGravity = true;
+        rigidbody.useGravity = true;
+        pressEPrompt.SetActive(true);
     }
 
     public void WinGame()
     {
         rigidbody.useGravity = false;
+        instructionsPanel.SetActive(false);
+        pressEPrompt.SetActive(false);
+        winCanvas.SetActive(true);
     }
 
     public void LoseGame()
     {
-        //do ui stuff here when lose
+        instructionsPanel.SetActive(false);
+        pressEPrompt.SetActive(false);
+        gameOverCanvas.SetActive(true);
+        Time.timeScale = 0;
     }
 
   

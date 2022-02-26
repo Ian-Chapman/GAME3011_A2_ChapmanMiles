@@ -141,13 +141,11 @@ public class PlayerBehaviour : MonoBehaviour
                         if (correctNotes == gameManager.noteList.Capacity)
                         {
                             Debug.Log("you win bruv");
-                            uiManager.WinGame();
                             animator.SetBool("isMelodyCorrect", true);
                             StartCoroutine(OpenDoor());
                         }
                         else
                         {
-                            Debug.Log("you lose");
                             notesPressed.Clear();
                             notesPressed.Capacity = 0;
                             correctNotes = 0;
@@ -245,5 +243,8 @@ public class PlayerBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(2.7f);
         doorAnimator.SetBool("isMelodyCorrect", true);
+        yield return new WaitForSeconds(1.3f);
+        uiManager.WinGame();
+        Time.timeScale = 0;
     }
 }

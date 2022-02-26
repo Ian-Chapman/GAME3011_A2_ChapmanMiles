@@ -13,7 +13,6 @@ public class BoxTriggerBehaviour : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             uIManager.instructionsPanel.SetActive(true);
-            uIManager.difficultyPanel.SetActive(true);
         }
     }
 }

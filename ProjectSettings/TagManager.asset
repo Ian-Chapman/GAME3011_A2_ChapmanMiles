@@ -18,6 +18,8 @@ TagManager:
   - A#
   - HighC
   - BoxTrigger
+  - BottomWall
+  - Ball
   layers:
   - Default
   - TransparentFX
