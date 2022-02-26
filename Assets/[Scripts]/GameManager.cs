@@ -7,11 +7,13 @@ public class GameManager : MonoBehaviour
   
     int numOfNotes;
     public List<string> noteList = new List<string>();
-    public string[] noteArray = { "D", "A", "B", "G", "D", "A", "B", "G" };
+    public string[] easyNoteArray = { "D", "A", "B", "G" };
+    public string[] mediumNoteArray = { "E", "E", "F", "G", "G", "F", "E", "D" };
+    public string[] hardNoteArray = { "E", "D", "C", "D", "E", "E", "E", "D", "D", "D", "G", "G", "G" };
 
     private void Awake()
     {
-        setDifficulty((int)Difficulty.EASY);
+        setDifficulty((int)Difficulty.MEDIUM);
     }
     // Start is called before the first frame update
     void Start()
@@ -30,21 +32,36 @@ public class GameManager : MonoBehaviour
         switch (difficultyNum)
         {
             case (int)Difficulty.EASY:
-                numOfNotes = 4;
+                numOfNotes = easyNoteArray.Length;
                 noteList.Capacity = numOfNotes;
-                assignNotes();
+
+                for (int i = 0; i < noteList.Capacity; i++)
+                {
+                    noteList.Add(easyNoteArray[i]);
+                    Debug.Log(noteList[i]);
+                }
 
                 break;
             case (int)Difficulty.MEDIUM:
-                numOfNotes = 6;
+                numOfNotes = mediumNoteArray.Length;
                 noteList.Capacity = numOfNotes;
-                assignNotes();
+
+                for (int i = 0; i < noteList.Capacity; i++)
+                {
+                    noteList.Add(mediumNoteArray[i]);
+                    Debug.Log(noteList[i]);
+                }
 
                 break;
             case(int)Difficulty.HARD:
-                numOfNotes = 8;
+                numOfNotes = hardNoteArray.Length;
                 noteList.Capacity = numOfNotes;
-                assignNotes();
+
+                for (int i = 0; i < noteList.Capacity; i++)
+                {
+                    noteList.Add(hardNoteArray[i]);
+                    Debug.Log(noteList[i]);
+                }
 
                 break;
         }
@@ -52,11 +69,7 @@ public class GameManager : MonoBehaviour
 
     void assignNotes()
     {
-        for (int i = 0; i < noteList.Capacity; i++)
-        {
-            noteList.Add(noteArray[i]);
-            Debug.Log(noteList[i]);
-        }
+
     }
     
 }
