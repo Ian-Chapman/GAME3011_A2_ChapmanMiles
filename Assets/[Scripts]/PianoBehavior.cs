@@ -26,6 +26,6 @@ public class PianoBehavior : MonoBehaviour
     public void playNote(string note)
     {
         pianoAnimation.Play(note);
-        Debug.Log(note);
+        //Debug.Log(note);
     }
 }

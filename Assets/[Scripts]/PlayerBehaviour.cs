@@ -24,6 +24,11 @@ public class PlayerBehaviour : MonoBehaviour
     GameObject pianoKey;
     PianoBehavior pianoBehavior;
 
+    public GameObject gameManagerGO;
+    GameManager gameManager;
+
+    List<string> notesPressed = new List<string>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +36,7 @@ public class PlayerBehaviour : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         animator = piano.GetComponent<Animator>();
+        gameManager = gameManagerGO.GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -64,17 +70,58 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 Transform objectHit = hit.transform;
 
-                Debug.Log(objectHit);
+                //Debug.Log(objectHit);
 
                 if (objectHit.gameObject.name.Contains("PianoKey"))
                 {
-                    Debug.Log("piano key hit");
+                    //Debug.Log("piano key hit");
                     pianoKey = objectHit.gameObject;
                     pianoBehavior = pianoKey.GetComponent<PianoBehavior>();
 
 
                     pianoBehavior.playNote(pianoKey.gameObject.tag + "_KeyPressed");
-                    Debug.Log(pianoKey.gameObject.tag);
+                    
+
+
+                    if(notesPressed.Capacity < gameManager.noteList.Capacity)
+                    {
+                        notesPressed.Capacity += 1;
+                        notesPressed.Add(pianoKey.gameObject.tag);
+                        Debug.Log("added: " + pianoKey.gameObject.tag);
+                        Debug.Log("capacity: " + notesPressed.Capacity);
+                    }
+                    
+                    if(notesPressed.Capacity == gameManager.noteList.Capacity)
+                    {
+                        Debug.Log("capacity reached");
+                        int correctNotes = 0;
+                        string[] playerNotes;
+                        string[] gameNotes;
+
+                        playerNotes = notesPressed.ToArray();
+                        gameNotes = gameManager.noteList.ToArray();
+
+                        for (int i = 0; i < notesPressed.Capacity; i++)
+                        { 
+
+                            if(playerNotes[i].Equals(gameNotes[i]))
+                            {
+                                correctNotes++;
+                            }
+                        }
+
+                        if (correctNotes == gameManager.noteList.Capacity)
+                        {
+                            Debug.Log("you win bruv");
+                        }
+                        else
+                        {
+                            Debug.Log("you lose");
+                            notesPressed.Clear();
+                            notesPressed.Capacity = 0;
+                        }
+                    }
+
 
                 }
                 else
