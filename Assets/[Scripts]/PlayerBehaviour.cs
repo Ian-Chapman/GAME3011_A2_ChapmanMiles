@@ -6,6 +6,10 @@ public class PlayerBehaviour : MonoBehaviour
 {
     public Animator animator;
     public GameObject piano;
+
+    public Animator doorAnimator;
+
+
     public Camera camera;
     private CharacterController controller;
 
@@ -28,6 +32,30 @@ public class PlayerBehaviour : MonoBehaviour
     GameManager gameManager;
 
     List<string> notesPressed = new List<string>();
+
+    public bool difficultySelected = false;
+
+    [SerializeField]
+    GameObject easyButton;
+    [SerializeField]
+    GameObject medButton;
+    [SerializeField]
+    GameObject hardButton;
+    [SerializeField]
+    GameObject clearButton;
+
+    [SerializeField]
+    GameObject easyText;
+    [SerializeField]
+    GameObject medText;
+    [SerializeField]
+    GameObject hardText;
+    [SerializeField]
+    GameObject clearText;
+
+    int correctNotes = 0;
+
+    public UIManager uiManager;
 
     // Start is called before the first frame update
     void Start()
@@ -72,7 +100,7 @@ public class PlayerBehaviour : MonoBehaviour
 
                 //Debug.Log(objectHit);
 
-                if (objectHit.gameObject.name.Contains("PianoKey"))
+                if (objectHit.gameObject.name.Contains("PianoKey") && difficultySelected == true)
                 {
                     //Debug.Log("piano key hit");
                     pianoKey = objectHit.gameObject;
@@ -94,7 +122,7 @@ public class PlayerBehaviour : MonoBehaviour
                     if(notesPressed.Capacity == gameManager.noteList.Capacity)
                     {
                         Debug.Log("capacity reached");
-                        int correctNotes = 0;
+                        
                         string[] playerNotes;
                         string[] gameNotes;
 
@@ -113,16 +141,76 @@ public class PlayerBehaviour : MonoBehaviour
                         if (correctNotes == gameManager.noteList.Capacity)
                         {
                             Debug.Log("you win bruv");
+                            uiManager.WinGame();
+                            animator.SetBool("isMelodyCorrect", true);
+                            StartCoroutine(OpenDoor());
                         }
                         else
                         {
                             Debug.Log("you lose");
                             notesPressed.Clear();
                             notesPressed.Capacity = 0;
+                            correctNotes = 0;
                         }
                     }
 
 
+                }else if(objectHit.gameObject == easyButton)
+                {
+                    Debug.Log("easy");
+                    gameManager.setDifficulty((int)Difficulty.EASY);
+                    difficultySelected = true;
+
+                    medButton.SetActive(false);
+                    medText.SetActive(false);
+
+                    hardButton.SetActive(false);
+                    hardText.SetActive(false);
+
+                    clearButton.SetActive(true);
+                    clearText.SetActive(true);
+
+                    uiManager.OnStartGame();
+                }
+                else if (objectHit.gameObject == medButton)
+                {
+                    Debug.Log("med");
+                    gameManager.setDifficulty((int)Difficulty.MEDIUM);
+                    difficultySelected = true;
+
+                    easyButton.SetActive(false);
+                    easyText.SetActive(false);
+
+                    hardButton.SetActive(false);
+                    hardText.SetActive(false);
+
+                    clearButton.SetActive(true);
+                    clearText.SetActive(true);
+                    uiManager.OnStartGame();
+                }
+
+                else if (objectHit.gameObject == hardButton)
+                {
+                    Debug.Log("hard");
+                    gameManager.setDifficulty((int)Difficulty.HARD);
+                    difficultySelected = true;
+
+                    easyButton.SetActive(false);
+                    easyText.SetActive(false);
+
+                    medButton.SetActive(false);
+                    medText.SetActive(false);
+
+                    clearButton.SetActive(true);
+                    clearText.SetActive(true);
+                    uiManager.OnStartGame();
+                }
+                else if (objectHit.gameObject == clearButton)
+                {
+                    Debug.Log("Attempt Cleared");
+                    notesPressed.Clear();
+                    notesPressed.Capacity = 0;
+                    correctNotes = 0;
                 }
                 else
                 {
@@ -151,5 +239,11 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
+    }
+
+    IEnumerator OpenDoor()
+    {
+        yield return new WaitForSeconds(2.7f);
+        doorAnimator.SetBool("isMelodyCorrect", true);
     }
 }

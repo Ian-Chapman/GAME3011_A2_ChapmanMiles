@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
   
-    int numOfNotes;
+    public int numOfNotes;
     public List<string> noteList = new List<string>();
     public string[] easyNoteArray = { "D", "A", "B", "G" };
     public string[] mediumNoteArray = { "E", "E", "F", "G", "G", "F", "E", "D" };
@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        setDifficulty((int)Difficulty.MEDIUM);
+
     }
     // Start is called before the first frame update
     void Start()
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         
     }
 
-    void setDifficulty(int difficultyNum)
+    public void setDifficulty(int difficultyNum)
     {
         switch (difficultyNum)
         {
@@ -71,7 +71,8 @@ public class GameManager : MonoBehaviour
     {
 
     }
-    
+   
+
 }
 
 

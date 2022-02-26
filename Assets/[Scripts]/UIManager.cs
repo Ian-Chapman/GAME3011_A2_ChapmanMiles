@@ -21,7 +21,10 @@ public class UIManager : MonoBehaviour
     
     public GameObject ball;
     public Rigidbody rigidbody;
+    public GameManager gameManager;
     //public Collider playerCollider;
+
+    bool isPlaying = false;
 
 
 
@@ -39,25 +42,68 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         ListenToMelody();
-        OnStartGame();
     }
 
     private void ListenToMelody()
     {
-        if (Input.GetKey("e"))
+        if (!isPlaying)
         {
-            soundSource.clip = melodies[0];
-            soundSource.Play();
+            if (Input.GetKey("e"))
+            {
+                if(gameManager.numOfNotes == 4 && player.GetComponent<PlayerBehaviour>().difficultySelected == true)
+                {
+                    isPlaying = true;
+
+                    soundSource.clip = melodies[0];
+                    soundSource.Play();
+                    StartCoroutine(enableMusic());
+                }
+
+                if (gameManager.numOfNotes == 8 && player.GetComponent<PlayerBehaviour>().difficultySelected == true)
+                {
+                    isPlaying = true;
+
+                    soundSource.clip = melodies[1];
+                    soundSource.Play();
+                    StartCoroutine(enableMusic());
+                }
+
+                if (gameManager.numOfNotes == 13 && player.GetComponent<PlayerBehaviour>().difficultySelected == true)
+                {
+                    isPlaying = true;
+
+                    soundSource.clip = melodies[2];
+                    soundSource.Play();
+                    StartCoroutine(enableMusic());
+                }
+
+            }
         }
+
     }
 
-
-    private void OnStartGame()
+    IEnumerator enableMusic()
     {
-        if (Input.GetKey("q"))
-        {
-            rigidbody.useGravity = true;
-        }
+        yield return new WaitForSeconds(9f);
+        isPlaying = false;
     }
+
+
+    public void OnStartGame()
+    {
+            rigidbody.useGravity = true;
+    }
+
+    public void WinGame()
+    {
+        rigidbody.useGravity = false;
+    }
+
+    public void LoseGame()
+    {
+        //do ui stuff here when lose
+    }
+
+  
 
 }
